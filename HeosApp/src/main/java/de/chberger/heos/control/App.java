@@ -1,7 +1,6 @@
 package de.chberger.heos.control;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
 
