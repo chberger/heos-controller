@@ -9,14 +9,17 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.enterprise.inject.Default;
+
+import de.chberger.protocoll.ssdp.api.SSDPClient;
 import de.chberger.protocoll.ssdp.types.ServiceType;
-import de.chberger.protocoll.ssdp.types.UPNPDevice;
 
 /**
- * Client for discovering UPNP devices with SSDP (Simple Service Discovery
+ * Implementation for discovering UPNP devices with SSDP (Simple Service Discovery
  * Protocol).
  */
-public class SSDPClient {
+@Default
+public class DiscoverySSDPClient implements SSDPClient{
 
 	private static final int DEFAULT_DISCOVER_TIMEOUT = 1500;
 	private static final int MULTICAST_PORT = 1900;
@@ -30,7 +33,8 @@ public class SSDPClient {
 	 * @return List of UPNP devices discovered
 	 * @throws IOException
 	 */
-	public static Set<UPNPDevice> discover() throws IOException {
+	@Override
+	public Set<UPNPDevice> discover() throws IOException {
 		return discover(ServiceType.DEFAULT);
 	}
 
@@ -43,7 +47,8 @@ public class SSDPClient {
 	 * @return List of UPNP devices discovered
 	 * @throws IOException
 	 */
-	public static Set<UPNPDevice> discover(ServiceType serviceType) throws IOException {
+	@Override
+	public Set<UPNPDevice> discover(ServiceType serviceType) throws IOException {
 		return discover(DEFAULT_DISCOVER_TIMEOUT, serviceType);
 	}
 
@@ -60,7 +65,8 @@ public class SSDPClient {
 	 *      "https://en.wikipedia.org/wiki/Simple_Service_Discovery_Protocol">SSDP
 	 *      Wikipedia Page</a>
 	 */
-	public static Set<UPNPDevice> discover(int timeout, ServiceType serviceType) throws IOException {
+	@Override
+	public Set<UPNPDevice> discover(int timeout, ServiceType serviceType) throws IOException {
 		Set<UPNPDevice> devices = new HashSet<UPNPDevice>();
 
 		byte[] sendData = createDiscoveryRequest(serviceType).getBytes();
@@ -105,7 +111,8 @@ public class SSDPClient {
 	 *      "https://en.wikipedia.org/wiki/Simple_Service_Discovery_Protocol">SSDP
 	 *      Wikipedia Page</a>
 	 */
-	public static UPNPDevice discoverOne(int timeout, ServiceType serviceType) throws IOException {
+	@Override
+	public UPNPDevice discoverOne(int timeout, ServiceType serviceType) throws IOException {
 		Set<UPNPDevice> devices = discover(timeout, serviceType);
 		if (!devices.isEmpty() && devices.iterator().hasNext()) {
 			return devices.iterator().next();
@@ -114,7 +121,7 @@ public class SSDPClient {
 		}
 	}
 
-	private static String createDiscoveryRequest(ServiceType serviceType) {
+	private String createDiscoveryRequest(ServiceType serviceType) {
 
 		StringBuilder request = new StringBuilder();
 		request.append("M-SEARCH * HTTP/1.1").append(LINE_END);

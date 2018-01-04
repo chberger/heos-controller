@@ -1,4 +1,4 @@
-package de.chberger.protocoll.ssdp.types;
+package de.chberger.protocoll.ssdp;
 
 import java.net.DatagramPacket;
 import java.util.HashMap;
@@ -6,16 +6,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Represent a UPNP Device discovered by SSDP.
+ * Represents a UPNP Device discovered by SSDP.
  */
 public class UPNPDevice {
-	protected String ip;
-	protected String descriptionUrl;
-	protected String server;
-	protected String serviceType;
-	protected String usn;
 	
-    protected UPNPDevice(String ip, String descriptionUrl, String server, String serviceType, String usn) {
+	private String ip;
+	private String descriptionUrl;
+	private String server;
+	private String serviceType;
+	private String usn;
+	
+    private UPNPDevice(String ip, String descriptionUrl, String server, String serviceType, String usn) {
         this.ip = ip;
         this.descriptionUrl = descriptionUrl;
         this.server = server;

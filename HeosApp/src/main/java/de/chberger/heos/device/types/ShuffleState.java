@@ -1,4 +1,4 @@
-package de.chberger.heos.devices.types;
+package de.chberger.heos.device.types;
 
 public enum ShuffleState {
 

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="%menu.title.file">
+          <items>
+            <MenuItem mnemonicParsing="false" text="%menu.title.new" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.open" />
+            <Menu mnemonicParsing="false" text="%menu.title.open.recent" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.close" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.save" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.save.as" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.revert" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.preferences" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="%menu.title.edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="%menu.title.undo" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.redo" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.cut" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.copy" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.paste" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.delete" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.select.all" />
+            <MenuItem mnemonicParsing="false" text="%menu.title.unselect.all" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="%menu.title.help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="%menu.title.about" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+      <ImageView fitHeight="320.0" fitWidth="640.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+      <HBox prefHeight="50.0" prefWidth="640.0" VBox.vgrow="NEVER" />
+  </children>
+  <stylesheets>
+    <URL value="@main.css" />
+  </stylesheets>
+</VBox>
