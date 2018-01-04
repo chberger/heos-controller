@@ -12,6 +12,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import de.chberger.heos.device.Speaker;
 import de.chberger.heos.junit.weld.WeldJUnit4Runner;
 import de.chberger.protocoll.ssdp.UPNPDevice;
 import de.chberger.protocoll.ssdp.api.SSDPClient;
@@ -44,5 +45,19 @@ public class RemoteControlTest {
 			Assert.fail(e.getMessage());
 		}
 	}
+	
+	@Test
+	public void getHeosSpeakers() {
+		UPNPDevice device;
+		try {
+			device = client.discoverOne(1500, ServiceType.HEOS);
+			Set<Speaker> speakers = control.getHeosSpeakers(device);
+			assertTrue(speakers.size()>0);
+			control.unregisterDevice(device);
+		} catch (IOException e) {
+			Assert.fail(e.getMessage());
+		}
+	}
+	
 
 }

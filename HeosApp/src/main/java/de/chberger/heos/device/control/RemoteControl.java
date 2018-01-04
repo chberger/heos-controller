@@ -1,5 +1,6 @@
 package de.chberger.heos.device.control;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Collections;
@@ -29,7 +30,6 @@ public class RemoteControl {
 	public Set<Speaker> getHeosSpeakers(UPNPDevice device) throws UnknownHostException {
 
 		if (device.getServiceType().equals(ServiceType.HEOS.getUrn())) {
-
 			client.initialize(InetAddress.getByName(device.getIPAddress()), DEFAULT_PORT_HEOS_DEVICE);
 			JSONObject response = getPlayers();
 			Set<Speaker> speakers = parseJSON(response);
@@ -40,6 +40,15 @@ public class RemoteControl {
 			throw new RuntimeException(String.format(
 					"Unable to hanlde device with service type <%s>! Only Heos devices <%s> are permitted!",
 					device.getServiceType(), ServiceType.HEOS.getUrn()));
+		}
+	}
+	
+	//FIXME Add some proper implementation
+	public void unregisterDevice(UPNPDevice device) throws IOException {
+		for (TelnetClient client : registry.getAllTelnetClients()) {
+			if (client != null) {
+				client.close();
+			}
 		}
 	}
 
