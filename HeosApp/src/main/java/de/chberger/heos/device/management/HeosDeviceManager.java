@@ -44,10 +44,19 @@ public class HeosDeviceManager {
 		}
 		return result;
 	}
+	
+	public JSONObject send(String heosCommand, HeosSpeaker speaker) throws IOException {
+		return send(heosCommand, speaker.getIp());
+	}
 
 	private JSONObject getPlayers(UPNPDevice device) throws IOException {
-		client.initialize(InetAddress.getByName(device.getIPAddress()), HEOS_DEFAULT_PORT);
-		JSONObject response = new JSONObject(client.send(HEOS_GET_ALL_PLAYERS));
+		return send(HEOS_GET_ALL_PLAYERS, device.getIPAddress());
+	}
+	
+	private JSONObject send(String heosCommand, String ip) throws IOException {
+		assert(heosCommand.startsWith(HEOS_PROTOCOLL));
+		client.initialize(InetAddress.getByName(ip), HEOS_DEFAULT_PORT);
+		JSONObject response = new JSONObject(client.send(heosCommand));
 		client.close();
 		verifyResponse(response);
 		return response;

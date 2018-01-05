@@ -16,7 +16,7 @@ public class UPNPDevice {
 	private String serviceType;
 	private String usn;
 	
-    private UPNPDevice(String ip, String descriptionUrl, String server, String serviceType, String usn) {
+    public UPNPDevice(String ip, String descriptionUrl, String server, String serviceType, String usn) {
         this.ip = ip;
         this.descriptionUrl = descriptionUrl;
         this.server = server;
