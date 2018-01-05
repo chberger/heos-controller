@@ -1,12 +1,8 @@
 package de.chberger.heos.main;
 
-import java.io.IOException;
-
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 
-import de.chberger.heos.device.control.SpeakerRegistry;
-import de.chberger.protocoll.telnet.api.TelnetClient;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -35,23 +31,11 @@ public class HeosApp extends Application {
 	@Override
 	public void stop() throws Exception {
 		super.stop();
-		closeClientConnections();
 		container.shutdown();
 	}
 
 	private void initalizeCDIContainer() {
 		Weld weld = new Weld();
 		container = weld.initialize();
-	}
-	
-	private void closeClientConnections() throws IOException {
-		SpeakerRegistry registry = container.select(SpeakerRegistry.class).get();
-		for (TelnetClient client : registry.getAllTelnetClients()) {
-			if (client != null) {
-				client.close();
-			}
-		}
-	}
-	
-	
+	}	
 }

@@ -1,4 +1,4 @@
-package de.chberger.heos.device.types;
+package de.chberger.heos.speaker.types;
 
 public enum RepeatState {
 

@@ -112,7 +112,7 @@ public class DiscoverySSDPClient implements SSDPClient{
 	 *      Wikipedia Page</a>
 	 */
 	@Override
-	public UPNPDevice discoverOne(int timeout, ServiceType serviceType) throws IOException {
+	public UPNPDevice discoverSingleDevice(int timeout, ServiceType serviceType) throws IOException {
 		Set<UPNPDevice> devices = discover(timeout, serviceType);
 		if (!devices.isEmpty() && devices.iterator().hasNext()) {
 			return devices.iterator().next();

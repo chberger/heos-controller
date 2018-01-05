@@ -1,13 +1,13 @@
-package de.chberger.heos.device.types;
+package de.chberger.heos.speaker.types;
 
-public enum MuteState {
-	
+public enum ShuffleState {
+
 	ON("on"),
 	OFF("off");
 	
 	private String state;
 	
-	private MuteState(String state) {
+	private ShuffleState(String state) {
 		this.state=state;
 	}
 

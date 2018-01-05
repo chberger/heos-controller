@@ -60,6 +60,6 @@ public interface SSDPClient {
 	 *      "https://en.wikipedia.org/wiki/Simple_Service_Discovery_Protocol">SSDP
 	 *      Wikipedia Page</a>
 	 */
-	public UPNPDevice discoverOne(int timeout, ServiceType serviceType) throws IOException;
+	public UPNPDevice discoverSingleDevice(int timeout, ServiceType serviceType) throws IOException;
 
 }
