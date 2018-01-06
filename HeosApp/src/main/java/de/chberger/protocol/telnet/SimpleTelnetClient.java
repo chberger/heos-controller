@@ -1,4 +1,4 @@
-package de.chberger.protocoll.telnet;
+package de.chberger.protocol.telnet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,10 +13,10 @@ import javax.inject.Inject;
 
 import org.apache.logging.log4j.Logger;
 
-import de.chberger.protocoll.telnet.api.TelnetClient;
+import de.chberger.protocol.telnet.api.TelnetClient;
 
 @Default
-public class DefaultTelnetClient implements TelnetClient {
+public class SimpleTelnetClient implements TelnetClient {
 
 	@Inject
 	private Logger logger;

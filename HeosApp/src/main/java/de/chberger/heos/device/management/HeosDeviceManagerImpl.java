@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 import org.jboss.weld.exceptions.IllegalArgumentException;
@@ -12,11 +13,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import de.chberger.heos.device.HeosSpeaker;
-import de.chberger.protocoll.ssdp.UPNPDevice;
-import de.chberger.protocoll.ssdp.types.ServiceType;
-import de.chberger.protocoll.telnet.api.TelnetClient;
+import de.chberger.heos.device.management.api.HeosDeviceManager;
+import de.chberger.protocol.ssdp.UPNPDevice;
+import de.chberger.protocol.ssdp.types.ServiceType;
+import de.chberger.protocol.telnet.api.TelnetClient;
 
-public class HeosDeviceManager {
+@Default
+public class HeosDeviceManagerImpl implements HeosDeviceManager {
 
 	private static final String HEOS_PROTOCOLL = "heos";
 	private static final String HEOS_GET_ALL_PLAYERS = HEOS_PROTOCOLL + "://player/get_players";
@@ -24,8 +27,9 @@ public class HeosDeviceManager {
 	private static final int HEOS_DEFAULT_PORT = 1255;
 
 	@Inject
-	private TelnetClient client;
+	protected TelnetClient client;
 
+	@Override
 	public Set<HeosSpeaker> getSpeakers(UPNPDevice device) throws IOException {
 
 		if (device.getServiceType().equals(ServiceType.HEOS.getUrn())) {
@@ -36,7 +40,8 @@ public class HeosDeviceManager {
 					device.getServiceType(), ServiceType.HEOS.getUrn()));
 		}
 	}
-
+	
+	@Override
 	public Set<HeosSpeaker> getSpeakers(Set<UPNPDevice> devices) throws IOException {
 		Set<HeosSpeaker> result = new HashSet<HeosSpeaker>();
 		for (UPNPDevice device : devices) {
@@ -45,6 +50,7 @@ public class HeosDeviceManager {
 		return result;
 	}
 	
+	@Override
 	public JSONObject send(String heosCommand, HeosSpeaker speaker) throws IOException {
 		return send(heosCommand, speaker.getIp());
 	}

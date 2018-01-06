@@ -1,4 +1,4 @@
-package de.chberger.protocoll.telnet.api;
+package de.chberger.protocol.telnet.api;
 
 import java.io.IOException;
 import java.net.InetAddress;

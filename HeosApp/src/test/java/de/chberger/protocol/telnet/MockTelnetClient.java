@@ -1,15 +1,17 @@
-package de.chberger.protocoll.telnet;
+package de.chberger.protocol.telnet;
 
 import java.io.IOException;
 import java.net.InetAddress;
 
-import javax.enterprise.inject.Specializes;
+import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
 
 import org.apache.logging.log4j.Logger;
 
-@Specializes
-public class MockTelnetClient extends DefaultTelnetClient {
+import de.chberger.protocol.telnet.api.TelnetClient;
+
+@Alternative
+public class MockTelnetClient implements TelnetClient {
 	
 	@Inject
 	private Logger logger;

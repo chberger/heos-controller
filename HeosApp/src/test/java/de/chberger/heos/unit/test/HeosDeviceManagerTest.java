@@ -1,4 +1,4 @@
-package de.chberger.heos.device.management;
+package de.chberger.heos.unit.test;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -14,19 +14,19 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import de.chberger.heos.device.HeosSpeaker;
-import de.chberger.heos.device.management.HeosDeviceManager;
+import de.chberger.heos.device.management.api.HeosDeviceManager;
 import de.chberger.heos.junit.weld.WeldJUnit4Runner;
 import de.chberger.heos.speaker.types.PlayState;
-import de.chberger.protocoll.ssdp.UPNPDevice;
-import de.chberger.protocoll.ssdp.api.SSDPClient;
-import de.chberger.protocoll.ssdp.types.ServiceType;
+import de.chberger.protocol.ssdp.UPNPDevice;
+import de.chberger.protocol.ssdp.api.SSDPClient;
+import de.chberger.protocol.ssdp.types.ServiceType;
 
 /**
- * Unit test for RemoteControl
+ * Unit tests for HeosDeviceManager
  */
 @RunWith(WeldJUnit4Runner.class)
 public class HeosDeviceManagerTest {
-
+	
 	@Inject
 	private HeosDeviceManager deviceManager;
 	

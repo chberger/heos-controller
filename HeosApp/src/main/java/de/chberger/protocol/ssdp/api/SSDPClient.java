@@ -1,10 +1,10 @@
-package de.chberger.protocoll.ssdp.api;
+package de.chberger.protocol.ssdp.api;
 
 import java.io.IOException;
 import java.util.Set;
 
-import de.chberger.protocoll.ssdp.UPNPDevice;
-import de.chberger.protocoll.ssdp.types.ServiceType;
+import de.chberger.protocol.ssdp.UPNPDevice;
+import de.chberger.protocol.ssdp.types.ServiceType;
 
 /**
  * Client for discovering UPNP devices with SSDP (Simple Service Discovery

@@ -1,4 +1,4 @@
-package de.chberger.protocoll.ssdp;
+package de.chberger.protocol.ssdp;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -11,8 +11,8 @@ import java.util.Set;
 
 import javax.enterprise.inject.Default;
 
-import de.chberger.protocoll.ssdp.api.SSDPClient;
-import de.chberger.protocoll.ssdp.types.ServiceType;
+import de.chberger.protocol.ssdp.api.SSDPClient;
+import de.chberger.protocol.ssdp.types.ServiceType;
 
 /**
  * Implementation for discovering UPNP devices with SSDP (Simple Service Discovery

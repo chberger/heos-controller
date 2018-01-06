@@ -1,4 +1,4 @@
-package de.chberger.protocoll.ssdp;
+package de.chberger.protocol.ssdp;
 
 import java.net.DatagramPacket;
 import java.util.HashMap;

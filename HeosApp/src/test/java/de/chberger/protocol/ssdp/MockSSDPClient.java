@@ -1,15 +1,17 @@
-package de.chberger.protocoll.ssdp;
+package de.chberger.protocol.ssdp;
 
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.enterprise.inject.Specializes;
+import javax.enterprise.inject.Alternative;
 
-import de.chberger.protocoll.ssdp.types.ServiceType;
+import de.chberger.protocol.ssdp.UPNPDevice;
+import de.chberger.protocol.ssdp.api.SSDPClient;
+import de.chberger.protocol.ssdp.types.ServiceType;
 
-@Specializes
-public class MockSSDPClient extends DiscoverySSDPClient {
+@Alternative
+public class MockSSDPClient implements SSDPClient {
 
 	private UPNPDevice device = new UPNPDevice("127.0.0.1", "heos.device.xml", "localhost", ServiceType.HEOS.getUrn(),
 			"usn:xxx");

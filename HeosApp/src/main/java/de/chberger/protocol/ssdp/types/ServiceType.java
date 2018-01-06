@@ -1,4 +1,4 @@
-package de.chberger.protocoll.ssdp.types;
+package de.chberger.protocol.ssdp.types;
 
 public enum ServiceType {
 	
