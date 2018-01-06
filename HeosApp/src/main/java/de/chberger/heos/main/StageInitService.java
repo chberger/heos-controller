@@ -2,9 +2,10 @@ package de.chberger.heos.main;
 
 import java.io.IOException;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 
 import javax.inject.Inject;
+
+import org.apache.logging.log4j.Logger;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

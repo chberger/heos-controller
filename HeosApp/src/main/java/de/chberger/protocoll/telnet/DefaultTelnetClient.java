@@ -6,10 +6,12 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.logging.Logger;
+import java.util.UUID;
 
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
+
+import org.apache.logging.log4j.Logger;
 
 import de.chberger.protocoll.telnet.api.TelnetClient;
 
@@ -46,10 +48,11 @@ public class DefaultTelnetClient implements TelnetClient {
 			connect();
 		}
 		try {
-			logger.fine(String.format("Sending command: %s", command));
+			UUID id = UUID.randomUUID();
+			logger.trace(String.format("Telnet request id<%s>: %s", id, command));
 			out.println(command);
 			final String response = in.readLine();
-			logger.fine(String.format("Receive response: %s", response));
+			logger.trace(String.format("Telnet responseid <%s>: %s", id, response));
 			return response;
 		} catch (IOException e) {
 			throw new RuntimeException(e);

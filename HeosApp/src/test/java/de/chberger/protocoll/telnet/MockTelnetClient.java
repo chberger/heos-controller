@@ -4,9 +4,15 @@ import java.io.IOException;
 import java.net.InetAddress;
 
 import javax.enterprise.inject.Specializes;
+import javax.inject.Inject;
+
+import org.apache.logging.log4j.Logger;
 
 @Specializes
 public class MockTelnetClient extends DefaultTelnetClient {
+	
+	@Inject
+	private Logger logger;
 
 	@Override
 	public void initialize(InetAddress ip, int port) {
@@ -16,6 +22,7 @@ public class MockTelnetClient extends DefaultTelnetClient {
 
 	@Override
 	public String send(String command) {
+		logger.debug(String.format("MockTelnetClient is being called with: %s",command));
 		switch (command) {
 		case "heos://player/get_players":
 			return "{\"heos\": {\"command\": \"player/get_players\",\"result\": \"success\",\"message\": \"\"},"+

@@ -1,9 +1,10 @@
 package de.chberger.heos.util.logger;
 
-import java.util.logging.Logger;
-
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Logging producer for injectable java util logger 
@@ -14,7 +15,8 @@ public class LoggerProducer {
 
 	@Produces
 	public Logger produceLogger(InjectionPoint injectionPoint) {
-		return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
+		Logger logger = LogManager.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
+		return logger;
 	}
 
 }
