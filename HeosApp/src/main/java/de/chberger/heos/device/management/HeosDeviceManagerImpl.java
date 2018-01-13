@@ -21,9 +21,9 @@ import de.chberger.protocol.telnet.api.TelnetClient;
 @Default
 public class HeosDeviceManagerImpl implements HeosDeviceManager {
 
-	private static final String HEOS_PROTOCOLL = "heos";
-	private static final String HEOS_GET_ALL_PLAYERS = HEOS_PROTOCOLL + "://player/get_players";
-	private static final String HEOS_JSON_RESULT = "result";
+	private static final String HEOS_PROTOCOL = "heos";
+	private static final String HEOS_GET_ALL_PLAYERS = HEOS_PROTOCOL + "://player/get_players";
+	private static final String HEOS_RESULT = "result";
 	private static final int HEOS_DEFAULT_PORT = 1255;
 
 	@Inject
@@ -40,7 +40,7 @@ public class HeosDeviceManagerImpl implements HeosDeviceManager {
 					device.getServiceType(), ServiceType.HEOS.getUrn()));
 		}
 	}
-	
+
 	@Override
 	public Set<HeosSpeaker> getSpeakers(Set<UPNPDevice> devices) throws IOException {
 		Set<HeosSpeaker> result = new HashSet<HeosSpeaker>();
@@ -49,7 +49,7 @@ public class HeosDeviceManagerImpl implements HeosDeviceManager {
 		}
 		return result;
 	}
-	
+
 	@Override
 	public JSONObject send(String heosCommand, HeosSpeaker speaker) throws IOException {
 		return send(heosCommand, speaker.getIp());
@@ -58,9 +58,10 @@ public class HeosDeviceManagerImpl implements HeosDeviceManager {
 	private JSONObject getPlayers(UPNPDevice device) throws IOException {
 		return send(HEOS_GET_ALL_PLAYERS, device.getIPAddress());
 	}
-	
+
 	private JSONObject send(String heosCommand, String ip) throws IOException {
-		assert(heosCommand.startsWith(HEOS_PROTOCOLL));
+		assert (heosCommand.startsWith(HEOS_PROTOCOL)) : "Unknwon protocol! Only " + HEOS_PROTOCOL
+				+ ":// is supported.";
 		client.initialize(InetAddress.getByName(ip), HEOS_DEFAULT_PORT);
 		JSONObject response = new JSONObject(client.send(heosCommand));
 		client.close();
@@ -69,8 +70,8 @@ public class HeosDeviceManagerImpl implements HeosDeviceManager {
 	}
 
 	private void verifyResponse(JSONObject response) {
-		if (!(response.getJSONObject(HEOS_PROTOCOLL).getString(HEOS_JSON_RESULT).equals("success"))) {
-			throw new IllegalStateException("A communication error has been occured!");
+		if (!(response.getJSONObject(HEOS_PROTOCOL).getString(HEOS_RESULT).equals("success"))) {
+			throw new IllegalStateException("A communication error has been occurred!");
 		}
 	}
 
