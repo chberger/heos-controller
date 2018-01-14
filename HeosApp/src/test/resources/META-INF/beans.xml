@@ -5,6 +5,9 @@
 	<alternatives>
 		<class>de.chberger.protocol.ssdp.MockSSDPClient</class>
 		<class>de.chberger.protocol.telnet.MockTelnetClient</class>
-		<class>de.chberger.heos.device.management.MockHeosDeviceManager</class>
+		<class>de.chberger.heos.device.management.MockTelnetClientManager
+		</class>
+		<class>de.chberger.heos.device.management.MockHeosDeviceManager
+		</class>
 	</alternatives>
 </beans>

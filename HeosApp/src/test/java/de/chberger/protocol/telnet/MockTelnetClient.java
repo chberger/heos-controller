@@ -19,7 +19,6 @@ public class MockTelnetClient implements TelnetClient {
 	@Override
 	public void initialize(InetAddress ip, int port) {
 		// Nothing to do
-
 	}
 
 	@Override
@@ -41,7 +40,6 @@ public class MockTelnetClient implements TelnetClient {
 	@Override
 	public void close() throws IOException {
 		// Nothing to do
-
 	}
 
 }

@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import de.chberger.heos.device.HeosSpeaker;
 import de.chberger.heos.device.management.api.HeosDeviceManager;
+import de.chberger.heos.device.management.api.TelnetClientManager;
 import de.chberger.protocol.ssdp.UPNPDevice;
 import de.chberger.protocol.ssdp.types.ServiceType;
 import de.chberger.protocol.telnet.api.TelnetClient;
@@ -24,11 +25,10 @@ public class HeosDeviceManagerImpl implements HeosDeviceManager {
 	private static final String HEOS_PROTOCOL = "heos";
 	private static final String HEOS_GET_ALL_PLAYERS = HEOS_PROTOCOL + "://player/get_players";
 	private static final String HEOS_RESULT = "result";
-	private static final int HEOS_DEFAULT_PORT = 1255;
-
+	
 	@Inject
-	protected TelnetClient client;
-
+	protected TelnetClientManager tcManager;
+	
 	@Override
 	public Set<HeosSpeaker> getSpeakers(UPNPDevice device) throws IOException {
 
@@ -54,6 +54,13 @@ public class HeosDeviceManagerImpl implements HeosDeviceManager {
 	public JSONObject send(String heosCommand, HeosSpeaker speaker) throws IOException {
 		return send(heosCommand, speaker.getIp());
 	}
+	
+	@Override
+	public void closeAllConnections() throws IOException {
+		for (TelnetClient client : tcManager.getAllTelnetClients()) {
+			client.close();		
+		}
+	}
 
 	private JSONObject getPlayers(UPNPDevice device) throws IOException {
 		return send(HEOS_GET_ALL_PLAYERS, device.getIPAddress());
@@ -62,9 +69,8 @@ public class HeosDeviceManagerImpl implements HeosDeviceManager {
 	private JSONObject send(String heosCommand, String ip) throws IOException {
 		assert (heosCommand.startsWith(HEOS_PROTOCOL)) : "Unknwon protocol! Only " + HEOS_PROTOCOL
 				+ ":// is supported.";
-		client.initialize(InetAddress.getByName(ip), HEOS_DEFAULT_PORT);
-		JSONObject response = new JSONObject(client.send(heosCommand));
-		client.close();
+		final TelnetClient client = tcManager.getTelnetClient(InetAddress.getByName(ip));
+		final JSONObject response = new JSONObject(client.send(heosCommand));
 		verifyResponse(response);
 		return response;
 	}
